@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Page config
-st.set_page_config(page_title="BOM Costing Tool", layout="centered")
+st.set_page_config(page_title="BOM Costing Tool", layout="wide")
 st.title("📊 BOM Costing Tool")
 
 # Upload section
@@ -30,9 +30,8 @@ if bom_file and purchase_file:
     desc_lookup = dict(zip(purchase_df["Variant code"], purchase_df["Variant description"]))
 
     st.success("Files loaded. Select a BOM Variant to calculate costs.")
-    bom_variants = bom_df["BOM Variant"].unique().tolist()
-    selected_bom = st.selectbox("Select BOM Variant", sorted(bom_variants), key="bom_search")
-
+    bom_variants = sorted(bom_df["BOM Variant"].unique().tolist())
+    selected_bom = st.selectbox("Select BOM Variant", bom_variants)
 
     # Recursive calculation function
     def calculate_cost(variant_code, qty=1, level=0, parent="ROOT"):
