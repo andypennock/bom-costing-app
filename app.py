@@ -31,7 +31,8 @@ if bom_file and purchase_file:
 
     st.success("Files loaded. Select a BOM Variant to calculate costs.")
     bom_variants = bom_df["BOM Variant"].unique().tolist()
-    selected_bom = st.selectbox("Select BOM Variant", bom_variants)
+    selected_bom = st.selectbox("Select BOM Variant", sorted(bom_variants), key="bom_search")
+
 
     # Recursive calculation function
     def calculate_cost(variant_code, qty=1, level=0, parent="ROOT"):
